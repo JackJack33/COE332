@@ -8,3 +8,5 @@ Each .py file parses their respective Meteorite_Landings file and outputs summar
 - Largest meteor
 - Smallest meteor
 - Hemisphere counts (N,E,S,W)
+
+ml_json_reader.py will additionally output a fixed.json file with some type changes (string to float and int)
