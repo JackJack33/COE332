@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from math import radians, cos, sin, asin, sqrt
 
 earth_radius = 6378.14

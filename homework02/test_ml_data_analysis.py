@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pytest
 from ml_data_analysis import topClassesByYear, missingValues, avgDistanceFromEquator
 from gcd_algorithm import greatCircleDistance
