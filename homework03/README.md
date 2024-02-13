@@ -18,15 +18,29 @@ This is the pytest file for `ml_data_analysis.py`.
 This is the pytest file for `gcd_algorithm.py`.
 
 ### Running the Code
-
+#### Non-Containerized
 1. Make sure Python3 is installed on your computer.
 2. Download or clone this repository into a directory.
 3. Download `Meteorite_Landings_20240205.csv` from https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data
 4. Place this file in the same directory you cloned into.
 5. Run the main script (`ml_data_analysis.py`)
+#### Containerized
+1. Make sure Docker is intalled on your computer
+2. Download or clone this repository into a directory.
+3. Download `Meteorite_Landings_20240205.csv` from https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data
+4. Place this file in the same directory you cloned into.
+5. In the directory, run `docker build -t ml_data_analysis:1.0 .` And wait for the Docker image to generate.
+6. In the directory, run `docker run --rm -it -v $PWD/Meteorite_Landings_20240205.csv:/data/Meteorite_Landings_20240205.csv ml_data_analysis:1.0 /bin/bash`
+7. Run `cd home`
+8. Run `ml_data_analysis.py`
 
 ### Interpretation
 - The `topClassesByYear` function provides insights into the distribution of meteorite classes over different years. (Default range is 2008-2010 inclusive)
 - The `missingValues` function counts the number of missing values for each key in the dataset.
 - The `avgDistanceFromEquator` function calculates the average distance of meteorite landings from the equator.
 - Any missing values or null entries are thrown out of the calculations.
+
+### Diagram
+![Diagram](diagram.png)
+
+This diagram shows the hierarchy of the containerized code. `/...` are extraneous directories, `.py` are Python scripts, and `.csv` is the data file which gets dynamically imported into the docker image via step 6 in the containerized instructions.
