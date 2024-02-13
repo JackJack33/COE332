@@ -6,6 +6,7 @@ RUN apt-get update && \
     apt-get install -y python3-pip
 
 RUN pip3 install pytest==8.0.0
+RUN pip3 install numpy
 
 COPY ml_data_analysis.py /code/ml_data_analysis.py
 COPY gcd_algorithm.py /code/gcd_algorithm.py
