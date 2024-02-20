@@ -117,7 +117,7 @@ def main():
             except:
                 logging.error(f'Unable to load row {index} in csv file')
 
-    logging.debug(f'Loaded csv file with {len(ml_data['meteorite_landings'])} rows')
+    logging.debug(f"Loaded csv file with {len(ml_data['meteorite_landings'])} rows")
 
     top_classes = topClassesByYear(ml_data, 'recclass', 'year')
     missing_values = missingValues(ml_data)
