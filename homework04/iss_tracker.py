@@ -4,16 +4,17 @@ import requests
 import xmltodict
 import math
 import logging
+from typing import Dict, List, Any
 from datetime import datetime
 
 url = "https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml"
 
-def fetch_data() -> dict[str, any]:
+def fetch_data() -> Dict[str, Any]:
     """
     Fetches data from the url variable and parses it as XML using xmltodict
 
     Returns:
-        dict[str, any]: The parsed XML data as a dictionary
+        Dict[str, Any]: The parsed XML data as a dictionary
     """
     try:
         response = requests.get(url)
@@ -28,15 +29,15 @@ def fetch_data() -> dict[str, any]:
         logging.error(f"Error parsing XML data: {exception} {response}")
         return
 
-def format_data(data_dict: dict[str, any]) -> list[dict[str, [str,float]]]:
+def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, [str,float]]]:
     """
     Parses/formats the XML dictionary into a list of dictionaries
 
     Args:
-        data_dict (dict[str, any]): Dictionary containing the XML data
+        data_dict (Dict[str, Any]): Dictionary containing the XML data
 
     Returns:
-        list[dict[str, [str,float]]]: A list of dictionaries containing formatted data
+        List[Dict[str, [str,float]]]: A list of dictionaries containing formatted data
     """
     formatted_data = []
 
@@ -68,12 +69,12 @@ def format_data(data_dict: dict[str, any]) -> list[dict[str, [str,float]]]:
 
     return formatted_data
 
-def calculate_data_range(formatted_data: list[dict[str, [str,float]]]) -> tuple[str]:
+def calculate_data_range(formatted_data: List[Dict[str, [str,float]]]) -> tuple[str]:
     """
     Calculates the range of data based on the first and last timestamps
 
     Args:
-        formatted_data (list[dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
 
     Returns:
         tuple[str]: The first and last timestamps
@@ -86,15 +87,15 @@ def calculate_data_range(formatted_data: list[dict[str, [str,float]]]) -> tuple[
         logging.error("Error: Empty formatted_data list")
         return
 
-def find_closest_epoch(formatted_data: list[dict[str, [str,float]]]) -> dict[str, [str,float]]:
+def find_closest_epoch(formatted_data: List[Dict[str, [str,float]]]) -> Dict[str, [str,float]]:
     """
     Finds the epoch closest to the current time in the formatted data
 
     Args:
-        formatted_data (list[dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
 
     Returns:
-        dict[str, [str,float]]: The dictionary representing the closest epoch
+        Dict[str, [str,float]]: The dictionary representing the closest epoch
     """
     try:
         current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
@@ -105,12 +106,12 @@ def find_closest_epoch(formatted_data: list[dict[str, [str,float]]]) -> dict[str
         logging.error("Error: Unable to calculate closest epoch")
         return
 
-def calculate_average_speed(formatted_data: list[dict[str, [str,float]]]) -> float:
+def calculate_average_speed(formatted_data: List[Dict[str, [str,float]]]) -> float:
     """
     Calculates the average speed based on the formatted data
 
     Args:
-        formatted_data (list[dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
 
     Returns:
         float: The average speed
@@ -127,12 +128,12 @@ def calculate_average_speed(formatted_data: list[dict[str, [str,float]]]) -> flo
         logging.error("Error: Empty formatted_data list (division by zero)")
         return
 
-def calculate_instantaneous_speed(closest_epoch: dict[str, [str,float]]) -> float:
+def calculate_instantaneous_speed(closest_epoch: Dict[str, [str,float]]) -> float:
     """
     Calculates the instantaneous speed based on the closest epoch
 
     Args:
-        closest_epoch (dict[str, [str,float]]): The dictionary representing the closest epoch
+        closest_epoch (Dict[str, [str,float]]): The dictionary representing the closest epoch
 
     Returns:
         float: The instantaneous speed
