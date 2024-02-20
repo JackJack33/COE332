@@ -57,7 +57,7 @@ test_data_dict = {
 
 test_formatted_data = [
     {
-        'timestamp': '0001-01-01 00:00:00.000000',
+        'timestamp': '1-01-01 00:00:00.000000',
         'x': 1.0,
         'y': -2.0,
         'z': 3.0,
@@ -66,7 +66,7 @@ test_formatted_data = [
         'dz': 6.0
     },
     {
-        'timestamp': '0001-01-02 00:00:00.000000',
+        'timestamp': '1-01-02 00:00:00.000000',
         'x': -7.0,
         'y': 8.0,
         'z': -9.0,
@@ -75,7 +75,7 @@ test_formatted_data = [
         'dz': 12.0
     },
     {
-        'timestamp': '0001-01-03 00:00:00.000000',
+        'timestamp': '1-01-03 00:00:00.000000',
         'x': 13.0,
         'y': -14.0,
         'z': 15.0,
@@ -84,7 +84,7 @@ test_formatted_data = [
         'dz': 18.0
     },
     {
-        'timestamp': '0001-01-04 00:00:00.000000',
+        'timestamp': '1-01-04 00:00:00.000000',
         'x': -19.0,
         'y': 20.0,
         'z': -21.0,
@@ -110,14 +110,14 @@ def test_calculate_data_range():
     first_epoch, last_epoch = calculate_data_range(formatted_data)
     assert isinstance(first_epoch, str)
     assert isinstance(last_epoch, str)
-    assert first_epoch == '0001-01-01 00:00:00.000000'
-    assert last_epoch == '0001-01-04 00:00:00.000000'
+    assert first_epoch == '1-01-01 00:00:00.000000'
+    assert last_epoch == '1-01-04 00:00:00.000000'
 
 def test_find_closest_epoch():
     formatted_data = format_data(test_data_dict)
     closest_epoch = find_closest_epoch(formatted_data)
     assert isinstance(closest_epoch, dict)
-    assert closest_epoch['timestamp'] == '0001-01-04 00:00:00.000000'
+    assert closest_epoch['timestamp'] == '1-01-04 00:00:00.000000'
 
 def test_calculate_average_speed():
     formatted_data = format_data(test_data_dict)

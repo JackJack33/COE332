@@ -4,7 +4,7 @@ import requests
 import xmltodict
 import math
 import logging
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 from datetime import datetime
 
 url = "https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml"
@@ -69,7 +69,7 @@ def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, Any]]:
 
     return formatted_data
 
-def calculate_data_range(formatted_data: List[Dict[str, Any]]) -> tuple[str]:
+def calculate_data_range(formatted_data: List[Dict[str, Any]]) -> Tuple[str, str]:
     """
     Calculates the range of data based on the first and last timestamps
 
