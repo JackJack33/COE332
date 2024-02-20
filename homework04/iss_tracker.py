@@ -29,7 +29,7 @@ def fetch_data() -> Dict[str, Any]:
         logging.error(f"Error parsing XML data: {exception} {response}")
         return
 
-def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, [str,float]]]:
+def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Parses/formats the XML dictionary into a list of dictionaries
 
@@ -37,7 +37,7 @@ def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, [str,float]]]:
         data_dict (Dict[str, Any]): Dictionary containing the XML data
 
     Returns:
-        List[Dict[str, [str,float]]]: A list of dictionaries containing formatted data
+        List[Dict[str, Any]]: A list of dictionaries containing formatted data
     """
     formatted_data = []
 
@@ -69,12 +69,12 @@ def format_data(data_dict: Dict[str, Any]) -> List[Dict[str, [str,float]]]:
 
     return formatted_data
 
-def calculate_data_range(formatted_data: List[Dict[str, [str,float]]]) -> tuple[str]:
+def calculate_data_range(formatted_data: List[Dict[str, Any]]) -> tuple[str]:
     """
     Calculates the range of data based on the first and last timestamps
 
     Args:
-        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, Any]]): A list of dictionaries containing formatted data
 
     Returns:
         tuple[str]: The first and last timestamps
@@ -87,12 +87,12 @@ def calculate_data_range(formatted_data: List[Dict[str, [str,float]]]) -> tuple[
         logging.error("Error: Empty formatted_data list")
         return
 
-def find_closest_epoch(formatted_data: List[Dict[str, [str,float]]]) -> Dict[str, [str,float]]:
+def find_closest_epoch(formatted_data: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Finds the epoch closest to the current time in the formatted data
 
     Args:
-        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, Any]]): A list of dictionaries containing formatted data
 
     Returns:
         Dict[str, [str,float]]: The dictionary representing the closest epoch
@@ -106,12 +106,12 @@ def find_closest_epoch(formatted_data: List[Dict[str, [str,float]]]) -> Dict[str
         logging.error("Error: Unable to calculate closest epoch")
         return
 
-def calculate_average_speed(formatted_data: List[Dict[str, [str,float]]]) -> float:
+def calculate_average_speed(formatted_data: List[Dict[str, Any]]) -> float:
     """
     Calculates the average speed based on the formatted data
 
     Args:
-        formatted_data (List[Dict[str, [str,float]]]): A list of dictionaries containing formatted data
+        formatted_data (List[Dict[str, Any]]): A list of dictionaries containing formatted data
 
     Returns:
         float: The average speed
@@ -128,12 +128,12 @@ def calculate_average_speed(formatted_data: List[Dict[str, [str,float]]]) -> flo
         logging.error("Error: Empty formatted_data list (division by zero)")
         return
 
-def calculate_instantaneous_speed(closest_epoch: Dict[str, [str,float]]) -> float:
+def calculate_instantaneous_speed(closest_epoch: Dict[str, Any]) -> float:
     """
     Calculates the instantaneous speed based on the closest epoch
 
     Args:
-        closest_epoch (Dict[str, [str,float]]): The dictionary representing the closest epoch
+        closest_epoch (Dict[str, Any]): The dictionary representing the closest epoch
 
     Returns:
         float: The instantaneous speed
