@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project involves tracking the International Space Station by fetching data from NASA's website and analyzing various parameters (range, closest epoch, average speed, and instantaneous speed) in Python. This is also a Flask app, enabling data to be requested and sent over the internet.
+This project involves tracking the International Space Station by fetching data from NASA's website and analyzing various parameters (range, closest epoch, average speed, and instantaneous speed) in Python. This is also a Flask app, enabling data to be requested and sent over the internet. The data can be accessed from this link, however the program will access it automatically: https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml
 
 ### Scripts
 `iss_tracker.py`
@@ -44,3 +44,6 @@ You can interact with the flask app via `curl localhost:5000/<route>` once it is
 - The `find_closest_epoch()` function finds the epoch closest to the current time.
 - The `calculate_average_speed()` function computes the average speed of the ISS using the formatted data.
 - The `calculate_instantaneous_speed()` function calculates the instantaneous speed of the ISS at the closest epoch.
+
+### Diagram
+![Diagram](diagram.png)
