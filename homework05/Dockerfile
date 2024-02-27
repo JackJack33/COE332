@@ -1,22 +1,15 @@
-FROM ubuntu:20.04
+FROM python:3.9
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y python3 && \
-    apt-get install -y python3-pip
+RUN mkdir /app
+WORKDIR /app
 
-RUN pip3 install pytest==8.0.0
-RUN pip3 install requests
-RUN pip3 install xmltodict
-RUN pip3 install flask
+RUN pip install pytest==8.0.0
+RUN pip install requests
+RUN pip install xmltodict
+RUN pip install flask
 
-COPY iss_tracker.py /code/iss_tracker.py
-COPY test_iss_tracker.py /code/test_iss_tracker.py
-
-RUN chmod +rx /code/iss_tracker.py
-RUN chmod +rx /code/test_iss_tracker.py
-
-ENV PATH="/code:$PATH"
+COPY iss_tracker.py /app/iss_tracker.py
+COPY test_iss_tracker.py /app/test_iss_tracker.py
 
 ENTRYPOINT ["python"]
 CMD ["iss_tracker.py"]
