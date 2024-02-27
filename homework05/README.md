@@ -32,8 +32,8 @@ You can interact with the flask app via `curl localhost:5000/<route>` once it is
 |-------------------------|-----------------------------------------------------------|
 | /epochs                 | Returns formatted epochs data                                    |
 | /epochs?limit=int&offset=int | Formatted epochs data starting at `offset` with `limit` entries  |
-| /epochs/<epoch>         | Returns state vector for a specific Epoch timestamp *(format: 'YYYY-MM-DD__HH_MM_SS.SSSSSS')*  |
-| /epochs/<epoch>/speed   | Returns instantaneous speed for a specific Epoch timestamp *(format: 'YYYY-MM-DD__HH_MM_SS.SSSSSS')* |
+| /epochs/\<epoch\>         | Returns state vector for a specific Epoch timestamp (format: 'YYYY-MM-DD__HH_MM_SS.SSSSSS')  |
+| /epochs/\<epoch\>/speed   | Returns instantaneous speed for a specific Epoch timestamp (format: 'YYYY-MM-DD__HH_MM_SS.SSSSSS') |
 | /now                    | Returns state vectors and instantaneous speed for the Epoch that is nearest in time |
 
 
