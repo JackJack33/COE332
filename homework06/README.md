@@ -17,6 +17,7 @@ This script contains functions for fetching and managing the data, alongside cre
 
 ### Flask Interaction
 You can interact with the flask app via `curl -X <method> localhost:5000/<route>` once it is up and running.
+IMPORTANT: Make sure to `curl -X POST localhost:5000/data` before trying to access the other methods. Nothing will break, however you wont get any data returned as the database would be empty otherwise.
 
 | Route            | Method | Description                              |
 |------------------|--------|-----------------------------------------------|
