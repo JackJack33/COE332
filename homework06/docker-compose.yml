@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  redis-db:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    user: "1000:1000"
+    command: ["--save", "1", "1"]
+  gene_api:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: gene_api:1.0
+    container_name: flask-gene-api-app
+    ports:
+      - "5000:5000"
+    command: ["python", "gene_api.py"]
