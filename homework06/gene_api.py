@@ -93,8 +93,8 @@ def get_gene_data(hgnc_id: str) -> Dict[str, str]:
         dict: Gene data stored in Redis.
     """
     try:
-        data = redis_client.hgetall(hgnc_id)
-        return data
+        data = redis_client.get(hgnc_id)
+        return json.loads(data.decode())
     except Exception as e:
         logging.error(f"Error fetching gene data: {e} {hgnc_id}")
         return None
