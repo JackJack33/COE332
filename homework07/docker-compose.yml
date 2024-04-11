@@ -16,4 +16,4 @@ services:
     container_name: flask-gene-api-app
     ports:
       - "5000:5000"
-    command: ["python", "gene_api.py"]
+    command: ["python", "api.py"]
