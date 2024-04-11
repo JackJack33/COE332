@@ -1,0 +1,1 @@
+This directory is to establish correct permissions for Redis
