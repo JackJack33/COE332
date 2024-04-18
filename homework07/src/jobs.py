@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
+import os
 import json
 import uuid
 import redis
 from hotqueue import HotQueue
 
-_redis_ip='redis-db'
+_redis_ip=os.environ.get('REDIS_IP')
 _redis_port='6379'
 
-rd = redis.Redis(host=_redis_ip, port=6379, db=0)
-q = HotQueue("queue", host=_redis_ip, port=6379, db=1)
-jdb = redis.Redis(host=_redis_ip, port=6379, db=2)
+rd = redis.Redis(host=_redis_ip, port=_redis_port, db=0)
+q = HotQueue("queue", host=_redis_ip, port=_redis_port, db=1)
+jdb = redis.Redis(host=_redis_ip, port=_redis_port, db=2)
 
 def _generate_jid():
     """
@@ -18,15 +19,15 @@ def _generate_jid():
     """
     return str(uuid.uuid4())
 
-def _instantiate_job(jid, status, start, end):
+def _instantiate_job(jid, status, hgnc_id, name):
     """
     Create the job object description as a python dictionary. Requires the job id,
-    status, start and end parameters.
+    status, hgnc_id and name parameters.
     """
     return {'id': jid,
             'status': status,
-            'start': start,
-            'end': end }
+            'hgnc_id': hgnc_id,
+            'name': name }
 
 def _save_job(jid, job_dict):
     """Save a job object in the Redis database."""
@@ -52,7 +53,7 @@ def get_job_by_id(jid):
 
 def get_all_job_ids():
     """Return a list of all job IDs."""
-    return q.job_ids()
+    return json.dumps([jid.decode('utf-8') for jid in jdb.keys()])
 
 def update_job_status(jid, status):
     """Update the status of job with job id `jid` to status `status`."""
@@ -62,3 +63,5 @@ def update_job_status(jid, status):
         _save_job(jid, job_dict)
     else:
         raise Exception()
+
+

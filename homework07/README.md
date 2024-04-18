@@ -17,7 +17,7 @@ This script contains functions for fetching and managing the data, alongside cre
 ### Running the Code (Containerized)
 1. Make sure Docker & Redis are intalled on your computer
 2. Download or clone this repository into a directory.
-3. In the directory, run `docker-compose up` And wait for the Docker image to generate and for the Flask app to start.
+3. In the directory, run `docker-compose up` And wait for the Docker images to generate and for the Flask app to start.
 4. To check things are up and running, in a separate terminal window run `docker ps -a`
 5. See Flask Interaction below
 
@@ -26,13 +26,16 @@ You can interact with the flask app via `curl -X <method> "localhost:5000/<route
 IMPORTANT: Make sure to `curl -X POST "localhost:5000/data"` before trying to access the other methods. Nothing will break, however you wont get any data returned as the database would be empty otherwise.
 
 #### Routes
-| Route            | Method | Description                              |
+| Route            | Method | Description                                   |
 |------------------|--------|-----------------------------------------------|
-| /data            | POST   | Posts data into Redis                           |
-| /data            | GET    | Returns all data from Redis                    |
-| /data            | DELETE | Deletes data in Redis                          |
+| /data            | POST   | Posts data into Redis                         |
+| /data            | GET    | Returns all data from Redis                   |
+| /data            | DELETE | Deletes data in Redis                         |
 | /genes           | GET    | Return JSON-formatted list of all hgnc_ids    |
-| /genes/<hgnc_id> | GET    | Return all data associated with `<hgnc_id>`    |
+| /genes/<hgnc_id> | GET    | Return all data associated with `<hgnc_id>`   |
+| /jobs            | POST   | Create a new job with a unique job ID         |
+| /jobs            | GET    | List all existing job IDs                     |
+| /jobs/<jobid>    | GET    | Return job information for given job ID       |
 
 #### Example
 

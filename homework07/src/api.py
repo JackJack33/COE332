@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import json
 import requests
 import logging
@@ -10,7 +11,10 @@ import jobs
 
 app = Flask(__name__)
 url = "https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/json/hgnc_complete_set.json"
-redis_client = redis.Redis(host='redis-db', port=6379, db=0)
+_redis_ip = os.environ.get('REDIS_IP')
+_redis_port = 6379
+redis_client = redis.Redis(host=_redis_ip, port=_redis_port, db=0)
+
 
 def fetch_data() -> bool:
     """
@@ -137,12 +141,12 @@ def get_gene(hgnc_id):
 @app.route('/jobs', methods=['POST'])
 def post_job():
     data = request.get_json()
-    start = data.get('start')
-    end = data.get('end')
-    if start is None or end is None:
-        return "Start and end parameters required", 400
+    hgnc_id = data.get('hgnc_id')
+    name = data.get('name')
+    if hgnc_id is None or name is None:
+        return "hgnc_id and name parameters required", 400
 
-    job_dict = jobs.add_job(start,end)
+    job_dict = jobs.add_job(hgnc_id,name)
     return jsonify(job_dict), 200
 
 @app.route('/jobs', methods=['GET'])
