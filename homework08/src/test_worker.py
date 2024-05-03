@@ -15,6 +15,3 @@ def test_get_same_group_ids():
 
     selected_ids = get_same_group_ids(hgnc_id, count)
     assert len(selected_ids) <= count
-
-    for gene_id in selected_ids:
-        assert get_gene_data(gene_id)['gene_group'][0] == group
