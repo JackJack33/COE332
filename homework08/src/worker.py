@@ -1,17 +1,23 @@
+import logging
 import json
 from jobs import get_job_by_id, update_job_status, q, rd
 from api import get_gene_data, get_gene_ids
 import time
 
 def get_same_group_ids(hgnc_id, count):
-    hgnc_data = jsonify(get_gene_data(hgnc_id))
-    group = hgnc_data.get('gene_group')
+    hgnc_data = get_gene_data(hgnc_id)
+    logging.error(hgnc_data)
+    group = hgnc_data['gene_group'][0]
+    logging.error(group)
 
     gene_ids = get_gene_ids()
     same_group_ids = [gene_id for gene_id in gene_ids
                       if (gene_id != hgnc_id) and
-                      jsonify(get_gene_data(gene_id)).get('gene_group') == group]
+                      get_gene_data(gene_id)['gene_group'][0] == group]
+
+    logging.error(same_group_ids)
     selected_ids = same_group_ids[:count]
+    logging.error(selected_ids)
 
     return selected_ids
 
