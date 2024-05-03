@@ -14,25 +14,28 @@ def get_same_group_ids(hgnc_id, count):
         return [hgnc_id]
 
     if group is not None:
+
+        logging.info(f"Searching for group {group}")
+
         gene_ids = get_gene_ids()
         same_group_ids = []
         for gene_id in gene_ids:
             try:
                 test_group = get_genet_data(gene_id)['gene_group'][0]
             except Exception as e:
-                continue;
+                continue
             if (gene_id != hgnc_id) and (test_group == group):
+                logging.info(f"Found gene {gene_id}")
                 same_group_ids.append(gene_id)
 
-    logging.error(same_group_ids)
     selected_ids = same_group_ids[:count]
-    logging.error(selected_ids)
 
     return selected_ids
 
 
 @q.worker
 def do_work(jobid):
+    logging.info("Worker started")
     update_job_status(jobid, 'in progress')
 
     job = get_job_by_id(jobid)
@@ -41,6 +44,7 @@ def do_work(jobid):
 
     selected_ids = get_same_group_ids(hgnc_id, count)
     results.set(jobid, json.dumps(selected_ids))
+    logging.info(f"Worker complete, found {len(selected_ids)} matching genes")
 
     update_job_status(jobid, 'complete')
 
