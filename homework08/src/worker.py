@@ -7,13 +7,22 @@ import time
 def get_same_group_ids(hgnc_id, count):
     hgnc_data = get_gene_data(hgnc_id)
     logging.error(hgnc_data)
-    group = hgnc_data['gene_group'][0]
-    logging.error(group)
+    try:
+        group = hgnc_data['gene_group'][0]
+    except Exception as e:
+        logging.error("Gene has no group")
+        return [hgnc_id]
 
-    gene_ids = get_gene_ids()
-    same_group_ids = [gene_id for gene_id in gene_ids
-                      if (gene_id != hgnc_id) and
-                      get_gene_data(gene_id)['gene_group'][0] == group]
+    if group is not None:
+        gene_ids = get_gene_ids()
+        same_group_ids = []
+        for gene_id in gene_ids:
+            try:
+                test_group = get_genet_data(gene_id)['gene_group'][0]
+            except Exception as e:
+                continue;
+            if (gene_id != hgnc_id) and (test_group == group):
+                same_group_ids.append(gene_id)
 
     logging.error(same_group_ids)
     selected_ids = same_group_ids[:count]
