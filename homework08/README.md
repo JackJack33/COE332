@@ -23,7 +23,7 @@ This script contains functions for fetching and managing the data, alongside cre
 
 ### Flask Interaction
 You can interact with the flask app via `curl -X <method> "localhost:5000/<route>"` once it is up and running.
-IMPORTANT: Make sure to `curl -X POST "localhost:5000/data"` before trying to access the other methods. Nothing will break, however you wont get any data returned as the database would be empty otherwise.
+IMPORTANT: Make sure to `curl -X POST "localhost:5000/data"` before trying to access the other methods and test scripts. Nothing will break, however you wont get any data returned as the database would be empty otherwise.
 
 #### Routes
 | Route              | Method   | Description                                   |
@@ -37,29 +37,21 @@ IMPORTANT: Make sure to `curl -X POST "localhost:5000/data"` before trying to ac
 | `/jobs`            | `GET`    | List all existing job IDs                     |
 | `/jobs/<jobid>`    | `GET`    | Return job information for given `<jobid>`    |
 
-#### Example
+#### Raw Example
 
 ```
 curl -X POST "localhost:5000/data"
 curl -X GET "localhost:5000/genes/HGNC:11501"
 ```
 
-Will return
+Will return:
 
 ```
 {
-  "_version_": 1793942625027358720,
-  "agr": "HGNC:11501",
-  "ccds_id": [
-    "CCDS10456"
-  ],
+  ...
   "date_approved_reserved": "1999-03-19",
   "date_modified": "2023-01-20",
-  "ena": [
-    "AJ002309"
-  ],
-  "ensembl_gene_id": "ENSG00000127561",
-  "entrez_id": "9143",
+  ...
   "gene_group": [
     "Synaptogyrins"
   ],
@@ -71,36 +63,25 @@ Will return
   "location_sortable": "16p13.3",
   "locus_group": "protein-coding gene",
   "locus_type": "gene with protein product",
-  "mane_select": [
-    "ENST00000248121.7",
-    "NM_004209.6"
-  ],
-  "mgd_id": [
-    "MGI:1341881"
-  ],
+  ...
   "name": "synaptogyrin 3",
-  "omim_id": [
-    "603927"
-  ],
-  "pubmed_id": [
-    9760194
-  ],
-  "refseq_accession": [
-    "NM_004209"
-  ],
-  "rgd_id": [
-    "RGD:1311801"
-  ],
+  ...
   "status": "Approved",
   "symbol": "SYNGR3",
-  "ucsc_id": "uc002cod.3",
-  "uniprot_ids": [
-    "O43761"
-  ],
-  "uuid": "fccf6ee6-9df7-4180-b69e-cc98fea9af3c",
-  "vega_id": "OTTHUMG00000128711"
+  ...
 }
 
+```
+
+#### Job Example
+```
+curl -X POST "localhost:5000/jobs" -H "Content-Type: application/json" -d '{"hgnc_id": "HGNC:11501", "count": 5}'
+curl -X GET "localhost:5000/results/<JOB ID>"
+```
+
+Will return a list of the 3 known synaptogyrins in humans.
+```
+["HGNC:11499", "HGNC:11500", "HGNC:11501"]
 ```
 
 ### Data Interpretation
