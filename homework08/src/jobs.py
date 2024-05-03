@@ -40,9 +40,10 @@ def _queue_job(jid):
     q.put(jid)
     return
 
-def add_job(start, end, status="submitted"):
+def add_job(start, end, status="submitted", jid=None):
     """Add a job to the redis queue."""
-    jid = _generate_jid()
+    if jid is None:
+        jid = _generate_jid()
     job_dict = _instantiate_job(jid, status, start, end)
     _save_job(jid, job_dict)
     _queue_job(jid)
