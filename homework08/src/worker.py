@@ -4,11 +4,13 @@ from jobs import get_job_by_id, update_job_status, q, rd, results
 from api import get_gene_data, get_gene_ids
 import time
 
+logging.basicConfig(level=logging.DEBUG)
+
 def get_same_group_ids(hgnc_id, count):
     hgnc_data = get_gene_data(hgnc_id)
-    logging.error(hgnc_data)
     try:
         group = hgnc_data['gene_group'][0]
+        logging.info(f"Found group {group}")
     except Exception as e:
         logging.error("Gene has no group")
         return [hgnc_id]
@@ -21,7 +23,7 @@ def get_same_group_ids(hgnc_id, count):
         same_group_ids = []
         for gene_id in gene_ids:
             try:
-                test_group = get_genet_data(gene_id)['gene_group'][0]
+                test_group = get_gene_data(gene_id)['gene_group'][0]
             except Exception as e:
                 continue
             if (gene_id != hgnc_id) and (test_group == group):
