@@ -2,7 +2,7 @@
 
 import pytest
 import uuid
-import jobs
+from jobs import add_job, get_job_by_id, get_results_by_id, get_all_job_ids, update_job_status
 
 # Functions
 
