@@ -102,6 +102,7 @@ def get_gene_data(hgnc_id: str) -> Dict[str, str]:
     """
     try:
         data = redis_client.get(hgnc_id)
+        logging.error(data)
         return json.loads(data.decode())
     except Exception as e:
         logging.error(f"Error fetching gene data: {e} {hgnc_id}")
