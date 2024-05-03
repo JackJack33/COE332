@@ -4,12 +4,12 @@ import time
 
 def get_same_group_ids(hgnc_id, count):
     hgnc_data = get_gene_data(hgnc_id)
-    group = hgnc_data.get('group')
+    group = hgnc_data['group']
 
     gene_ids = get_gene_ids()
     same_group_ids = [gene_id for gene_id in gene_ids
                       if (gene_id != hgnc_id) and
-                      get_gene_data(gene_id).get('group') == group]
+                      get_gene_data(gene_id)['group'] == group]
     selected_ids = same_group_ids[:count]
 
     return selected_ids
