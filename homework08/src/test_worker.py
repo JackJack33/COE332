@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import pytest
-import worker
+from worker import get_same_group_ids
 from api import get_gene_data
 
 # Functions

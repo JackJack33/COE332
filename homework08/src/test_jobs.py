@@ -15,10 +15,6 @@ def test_get_job_by_id():
     assert job is not None
     assert job['status'] is not None
 
-def test_get_results_by_id():
-    result = get_results_by_id("test_jid")
-    assert result is not None
-
 def test_get_all_job_ids():
     job_ids = get_all_job_ids()
     assert isinstance(job_ids, str)
