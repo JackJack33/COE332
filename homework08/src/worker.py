@@ -1,6 +1,6 @@
 import logging
 import json
-from jobs import get_job_by_id, update_job_status, q, rd
+from jobs import get_job_by_id, update_job_status, q, rd, results
 from api import get_gene_data, get_gene_ids
 import time
 
