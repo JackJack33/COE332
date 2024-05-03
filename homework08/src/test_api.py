@@ -41,7 +41,7 @@ def test_route_data_post():
 def test_route_data_get():
     response1 = requests.get('http://localhost:5000/data')
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
+    assert isinstance(response1.json(), dict)
 
 # Deleting handled below
 
@@ -50,13 +50,13 @@ def test_route_data_get():
 def test_route_genes_get():
     response1 = requests.get('http://localhost:5000/genes')
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
+    assert isinstance(response1.json(), list) #list of dicts
 
 def test_route_genes_id_get():
     hgnc_id = 'HGNC:11501'
     response1 = requests.get(f'http://localhost:5000/genes/{hgnc_id}')
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
+    assert isinstance(response1.json(), dict)
 
 # Jobs
 
@@ -67,7 +67,7 @@ def test_route_jobs_post():
     }
     response1 = requests.post('http://localhost:5000/jobs', json=data)
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
+    assert isinstance(response1.json(), dict)
 
 def test_route_jobs_get():
     response1 = requests.get('http://localhost:5000/jobs')
