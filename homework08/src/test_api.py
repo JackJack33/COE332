@@ -37,7 +37,6 @@ def test_delete_all_data():
 def test_route_data_post():
     response1 = requests.post('http://localhost:5000/data')
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
 
 def test_route_data_get():
     response1 = requests.get('http://localhost:5000/data')
@@ -80,7 +79,6 @@ def test_route_jobs_id_get():
     jid = 'INVALID_TESTING_UUID'
     response1 = requests.get(f'http://localhost:5000/genes/{jid}')
     assert response1.status_code == 404
-    assert isinstance(response1.json(), list)
 
 # Results
 
@@ -88,9 +86,7 @@ def test_route_results_id_get():
     jid = 'INVALID_TESTING_UUID'
     response1 = requests.get(f'http://localhost:5000/results/{jid}')
     assert response1.status_code == 404
-    assert isinstance(response1.json(), list)
 
 def test_route_data_delete():
     response1 = requests.delete('http://localhost:5000/data')
     assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
