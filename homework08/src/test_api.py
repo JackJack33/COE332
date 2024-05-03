@@ -9,24 +9,27 @@ import api
 def test_fetch_data():
     test_bool = api.fetch_data()
     assert isinstance(test_bool, bool)
-    assert bool == True
+    assert test_bool == True
 
 def test_get_all_data():
     test_dict = api.get_all_data()
     assert isinstance(test_dict, dict)
-
-def test_delete_all_data():
-    test_bool = api.delete_all_data()
-    assert isinstance(test_bool, bool)
-    assert bool == True
+    assert len(test_dict) > 0
 
 def test_get_gene_ids():
     test_list = api.get_gene_ids()
     assert isinstance(test_list, list)
+    assert len(test_list) > 0
 
 def test_get_gene_data():
     test_dict = api.get_gene_data('HGNC:11501')
     assert isinstance(test_dict, dict)
+    assert len(test_dict) > 0
+
+def test_delete_all_data():
+    test_bool = api.delete_all_data()
+    assert isinstance(test_bool, bool)
+    assert test_bool == True
 
 # Flask Routes
 # Data
@@ -41,10 +44,7 @@ def test_route_data_get():
     assert response1.status_code == 200
     assert isinstance(response1.json(), list)
 
-def test_route_data_delete():
-    response1 = requests.delete('http://localhost:5000/data')
-    assert response1.status_code == 200
-    assert isinstance(response1.json(), list)
+# Deleting handled below
 
 # Genes
 
@@ -88,4 +88,9 @@ def test_route_results_id_get():
     jid = 'INVALID_TESTING_UUID'
     response1 = requests.get(f'http://localhost:5000/results/{jid}')
     assert response1.status_code == 404
+    assert isinstance(response1.json(), list)
+
+def test_route_data_delete():
+    response1 = requests.delete('http://localhost:5000/data')
+    assert response1.status_code == 200
     assert isinstance(response1.json(), list)
